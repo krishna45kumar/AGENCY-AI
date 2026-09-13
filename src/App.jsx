@@ -21,6 +21,9 @@ const App = () => {
   const position = useRef({x:0 , y:0}) 
 
   useEffect (()=>{
+      const previousScrollRestoration = window.history.scrollRestoration
+      window.history.scrollRestoration = 'manual'
+      window.scrollTo(0, 0)
    
      const handleMouseMove =(e)=>{
         mouse.current.x = e.clientX
@@ -44,6 +47,7 @@ const App = () => {
       return ()=>{
         document.removeEventListener('mousemove' , handleMouseMove)
         cancelAnimationFrame(animationFrame)
+        window.history.scrollRestoration = previousScrollRestoration
       }
   },[])
   
